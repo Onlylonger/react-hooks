@@ -1,0 +1,9 @@
+@import '../style/_var.css';
+
+.app {
+    display: flex;
+    color: var(--theme);
+    & .banner {
+        background-color: blue;
+    }
+}
