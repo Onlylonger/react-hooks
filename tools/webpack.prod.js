@@ -2,7 +2,14 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { commonRules, commonOpts } = require('./webpack.common.js')
+const {
+  commonRules,
+  commonOpts,
+  createProgressPlugins,
+} = require('./webpack.common.js')
+const config = require('../config/index')
+
+const rootPath = path.resolve(__dirname, '../')
 
 const plugins = [
   new HtmlWebpackPlugin({
@@ -14,6 +21,7 @@ const plugins = [
     filename: '[name].css',
     chunkFilename: '[id].css',
   }),
+  createProgressPlugins(),
 ]
 
 const rules = [
@@ -43,10 +51,31 @@ const rules = [
 
 module.exports = {
   ...commonOpts,
+  output: {
+    path: `${rootPath}/dist`,
+    filename: '[name]-[hash].js',
+    publicPath: config.prod.cdnPath,
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   module: {
     rules,
   },
   plugins,
   mode: 'production',
   devtool: false,
+  stats: {
+    assets: true,
+  }, // lets you precisely control what bundle information gets displayed
+  performance: {
+    hints: 'warning', // enum    maxAssetSize: 200000, // int (in bytes),
+    maxEntrypointSize: 400000, // int (in bytes)
+    assetFilter: function(assetFilename) {
+      // Function predicate that provides asset filenames
+      return assetFilename.endsWith('.css') || assetFilename.endsWith('.js')
+    },
+  },
 }

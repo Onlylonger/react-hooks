@@ -1,7 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { commonRules, commonOpts } = require('./webpack.common.js')
+const {
+  commonRules,
+  commonOpts,
+  createProgressPlugins,
+} = require('./webpack.common.js')
+const config = require('../config/index')
 
 const rootPath = path.resolve(__dirname, '../')
 
@@ -12,6 +17,7 @@ const plugins = [
   new webpack.HotModuleReplacementPlugin({
     // Options...
   }),
+  createProgressPlugins(),
 ]
 
 const rules = [
@@ -34,6 +40,11 @@ const rules = [
 
 module.exports = {
   ...commonOpts,
+  output: {
+    path: `${rootPath}/dist`,
+    filename: '[name]-[hash].js',
+    publicPath: config.dev.cdnPath,
+  },
   module: {
     rules,
   },
@@ -48,4 +59,5 @@ module.exports = {
     https: false, // true for self-signed, object for cert authority
     noInfo: true, // only errors & warns on hot reload
   },
+  stats: 'minimal', // lets you precisely control what bundle information gets displayed
 }

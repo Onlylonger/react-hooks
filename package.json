@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./tools/webpack.dev.js",
-    "build": "NODE_ENV=production webpack --config ./tools/webpack.build.js"
+    "build": "NODE_ENV=production webpack --config ./tools/webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
+    "ora": "^3.0.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
