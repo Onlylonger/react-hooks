@@ -7,6 +7,16 @@
     padding: 20px;
     align-items: center;
 
+    & .cancel {
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: 40%;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+
     & .circle {
         width: 30px;
         height: 30px;
@@ -31,10 +41,21 @@
     & .label {
         font-size: 24px;
         word-break: break-all;
-        padding: 15px 15px 15px 70px;
+        padding: 15px 15px 15px 20px;
         display: block;
         font-weight: 300;
         line-height: 1.2;
         transition: color 0.4s;
+    }
+
+    & .labelComplete {
+        color: #d9d9d9;
+        text-decoration: line-through;
+    }
+
+    &:hover {
+        & .cancel {
+            display: block;
+        }
     }
 }
