@@ -52,7 +52,7 @@ const handler = (percentage, message, ...args) => {
     spinner.stop()
     console.log(chalk.green(`\n 构建完成 \n`))
   } else {
-    spinner.text = chalk.green(`${newPercent}%`)
+    spinner.text = `${chalk.green(`${newPercent}% | ${message}`)}`
     spinner.start()
   }
 }
