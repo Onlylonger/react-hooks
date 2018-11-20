@@ -43,10 +43,25 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
+              localIdentName: isProd
+                ? '[hash:base64:5]'
+                : '[path][name][hash:base64:5]',
             },
           },
           'postcss-loader',
         ],
+      },
+      {
+        test: /\.(png|jpe?g|gif)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'img/[name].[hash:7].[ext]',
+        },
+      },
+      {
+        test: /\.svg$/,
+        loader: '@svgr/webpack',
       },
     ],
   },

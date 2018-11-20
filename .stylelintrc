@@ -2,6 +2,12 @@
   "extends": ["stylelint-config-recommended", "stylelint-config-prettier"],
   "rules": {
     "number-leading-zero": null,
-    "indentation": 4
+    "indentation": 4,
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["composes", "compose-with"]
+      }
+    ]
   }
 }
