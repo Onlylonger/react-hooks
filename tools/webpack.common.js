@@ -57,6 +57,12 @@ const handler = (percentage, message, ...args) => {
   }
 }
 
+process.on('SIGINT', function() {
+  spinner.stop()
+  console.log(chalk.red(`\n 强制退出 \n`))
+  process.exit()
+})
+
 exports.createProgressPlugins = () => {
   return new webpack.ProgressPlugin(handler)
 }
