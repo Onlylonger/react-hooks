@@ -5,12 +5,21 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./tools/webpack.dev.js",
-    "build": "NODE_ENV=production webpack --config ./tools/webpack.prod.js"
+    "build": "NODE_ENV=production webpack --config ./tools/webpack.prod.js",
+    "lint": "tslint src/**/*.tsx && tslint src/**/*.ts && stylelint src/**/*.css"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
     "@svgr/webpack": "^4.0.3",
     "@types/classnames": "^2.2.6",
     "@types/react": "^16.7.6",
@@ -19,6 +28,7 @@
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.2.0",
     "mini-css-extract-plugin": "^0.4.4",
     "ora": "^3.0.0",
     "postcss-cssnext": "^3.1.0",
